@@ -1,5 +1,6 @@
 Lottoland Rock, Paper, Scissors
 =====
+![Java CI with Maven](https://github.com/nicolasllk/LottolandRPS/workflows/Java%20CI%20with%20Maven/badge.svg)
 Back-end Java Challenge
 First Part
 ● Write a program to play rounds of Rock, Paper, Scissors
