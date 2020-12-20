@@ -1,14 +1,9 @@
 package com.exercise.lottolandRPS.model;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 
 import static org.testng.Assert.*;
 public class PlayerTest {
