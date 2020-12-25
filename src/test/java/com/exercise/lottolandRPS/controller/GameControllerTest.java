@@ -5,16 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 
 import static org.testng.Assert.*;
 @SpringBootTest(classes = LottolandRpsApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RPSRoundControllerTest extends AbstractTestNGSpringContextTests {
+public class GameControllerTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private RPSRoundController rpsRoundController;
+    private GameController gameController;
 
     @LocalServerPort
     private int port;
@@ -24,24 +27,18 @@ public class RPSRoundControllerTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testContextLoad() {
-        assertFalse(rpsRoundController == null);
+        assertFalse(gameController == null);
     }
 
     @Test
     public void testRoundStatus() throws Exception {
-        assertEquals(this.restTemplate.getForObject("http://localhost:" + port + "/round/status/1", Object.class), null);
-
+        ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/session/status/1", String.class);
+        assertEquals(response.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Test
     public void testNewRound() throws Exception {
-        long roundId = this.restTemplate.postForObject("http://localhost:" + port + "/round", null, Long.class);
-        assertEquals(roundId, 1L);
-
-    }
-
-    @Test
-    public void testResetRound() throws Exception {
-        assertEquals(this.restTemplate.getForObject("http://localhost:" + port + "/round/status/1", Object.class), null);
+        Long roundId = this.restTemplate.postForObject("http://localhost:" + port + "/session/new", null, Long.class);
+        assertEquals(roundId.longValue(), 0L);
     }
 }

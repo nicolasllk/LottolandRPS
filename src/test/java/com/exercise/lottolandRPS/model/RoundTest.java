@@ -1,11 +1,9 @@
 package com.exercise.lottolandRPS.model;
 
 import org.mockito.Mockito;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.testng.Assert.*;
@@ -13,10 +11,11 @@ public class RoundTest {
 
     @Test
     public void testNewRound() {
-        Round round = new Round(generatePlayerList());
-
-        Assert.assertEquals(round.getPlayers().size(), 2);
+        Round round = new Round(0);
+        assertEquals(round.getLooser(), null);
+        assertEquals(round.getWinner(), null);
         assertEquals(round.isDraw(), false);
+        assertEquals(round.getId(), 0);
     }
 
     private List<Player> generatePlayerList() {
