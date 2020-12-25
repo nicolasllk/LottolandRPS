@@ -3,24 +3,17 @@ package com.exercise.lottolandRPS.model;
 import java.util.List;
 
 public class Round {
-    private List<Player> players;
-    private boolean isDraw;
+    private long id;
+    private Player winner;
+    private Player looser;
+    private boolean isDraw = false;
 
-    public Round(final List<Player> players) {
-        this.players = players;
-        isDraw = false;
+    public Round(long id) {
+        this.id = id;
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(final List<Player> players) {
-        this.players = players;
-    }
-
-    public void addPlayer(final Player player) {
-        this.players.add(player);
+    public long getId() {
+        return id;
     }
 
     public boolean isDraw() {
@@ -29,5 +22,21 @@ public class Round {
 
     public void setDraw(final boolean draw) {
         isDraw = draw;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(final Player winner) {
+        this.winner = new Player(winner.getName(), winner.getSelection(), winner.getScore());
+    }
+
+    public Player getLooser() {
+        return looser;
+    }
+
+    public void setLooser(final Player looser) {
+        this.looser = new Player(looser.getName(), looser.getSelection(), looser.getScore());
     }
 }

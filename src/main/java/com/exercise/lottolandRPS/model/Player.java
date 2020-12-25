@@ -13,6 +13,12 @@ public class Player {
         this.score = 0;
     }
 
+    public Player(final String name, final Selection selection, final int score) {
+        this.name = name;
+        this.selection = selection;
+        this.score = score;
+    }
+
     public int getScore() {
         return this.score;
     }
@@ -27,6 +33,10 @@ public class Player {
 
     public void setScore(final int score) {
         this.score = score;
+    }
+
+    public void incScore(final int score) {
+        this.score += score;
     }
 
     /**
