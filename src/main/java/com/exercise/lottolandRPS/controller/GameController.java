@@ -3,6 +3,7 @@ package com.exercise.lottolandRPS.controller;
 import com.exercise.lottolandRPS.model.GameSession;
 import com.exercise.lottolandRPS.service.GameSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +19,13 @@ public class GameController {
 
     //REST ENDPOINTS NEED TO BE REFINED
     @GetMapping("/status/{id}")
-    public GameSession roundStatus(@PathVariable final Long id) {
-        return gameSessionService.getGameSession(id);
+    public ResponseEntity<GameSession> roundStatus(@PathVariable final Long id) {
+        return new ResponseEntity<>(gameSessionService.getGameSession(id), HttpStatus.OK);
     }
 
     @PostMapping("/new")
-    public Long create() {
-        return gameSessionService.newGameSession();
+    public ResponseEntity<Long> create() {
+        return new ResponseEntity<>(gameSessionService.newGameSession(), HttpStatus.OK);
     }
 
     //This is VERY insecure since anyone can reset any ongoing round
@@ -35,7 +36,8 @@ public class GameController {
     }
 
     @PostMapping("play/{id}")
-    public void playGame(@PathVariable Long id) {
+    public ResponseEntity<?> playGame(@PathVariable Long id) {
         gameSessionService.playGameRound(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
